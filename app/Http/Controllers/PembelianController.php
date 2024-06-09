@@ -15,16 +15,21 @@ class PembelianController extends Controller
             $list_keranjang = DB::table('pembelian')
                 ->where('id_pembeli', '=', Auth::user()->id)
                 ->get();
-
-            return view('pembelian.index', compact('list_keranjang'));
+        } else if (Auth::user()->role == "admin") {
+            $list_keranjang = DB::table('pembelian')
+                ->join('users', 'pembelian.id_pembeli', '=', 'users.id')
+                ->join('products', 'pembelian.id_product', '=', 'products.id')
+                ->select('pembelian.id', 'pembelian.nama_product', 'pembelian.tanggal_pembelian', 'pembelian.jumlah', 'users.email as email', 'pembelian.status', 'pembelian.total_harga')
+                ->get();
         } else {
             $list_keranjang = DB::table('pembelian')
                 ->join('users', 'pembelian.id_pembeli', '=', 'users.id')
-                ->select('pembelian.id', 'pembelian.nama_product', 'pembelian.tanggal_pembelian', 'pembelian.jumlah', 'users.email as email', 'pembelian.status', 'pembelian.total_harga', 'pembelian.jumlah')
+                ->join('products', 'pembelian.id_product', '=', 'products.id')
+                ->select('pembelian.id', 'pembelian.nama_product', 'pembelian.tanggal_pembelian', 'pembelian.jumlah', 'users.email as email', 'pembelian.status', 'pembelian.total_harga')
+                ->where('products.id_penjual', '=', Auth::id())
                 ->get();
-
-            return view('pembelian.index', compact('list_keranjang'));
         }
+        return view('pembelian.index', compact('list_keranjang'));
     }
 
     public function create()

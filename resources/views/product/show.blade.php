@@ -13,6 +13,11 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $product->nama_product }}" disabled>
                         </div>
+                        <!-- <div class="form-group">
+                            <label for="name"><strong>Nama UMKM</strong></label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ $product->nama_umkm }}" disabled>
+                        </div> -->
                         <div class="form-group">
                             <label for="deskripsi_produk"><strong>Deskripsi</strong></label>
                             <textarea name="deskripsi_produk" class="form-control" rows="3"
@@ -38,24 +43,24 @@
                             value="{{ $product->id }}">
                         <div class="col">
                             <div class="col-md-12 mt-3 d-flex justify-content-end">
-                                <div class="form-group">
+                                <div class="form-group mx-4">
                                     <input type="number" name="jumlah" class="form-control" placeholder="Jumlah">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Beli</button>
+                                <button type="submit" class="btn btn-primary">Tambah Ke Keranjang</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <div class="card" style="height: 500px;">
                 <div class="card-header">Ulasan</div>
                 <div class="card-body">
 
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 @endsection

@@ -17,8 +17,10 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Product List</h2>
+            <h2>List Produk</h2>
+            @if (Auth::user()->role != "pembeli")
             <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tambah Produk</a>
+            @endif
             <table class="table table-striped" id="productTable">
                 <thead>
                     <tr>

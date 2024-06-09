@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Models\Umkm;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -31,6 +30,8 @@ class ProductController extends Controller
             'kategori_product' => 'required',
             'harga' => 'required',
         ]);
+
+        $validationRequest["id_penjual"] = Auth::user()->id;
 
         Product::create($validationRequest);
 

@@ -4,7 +4,7 @@
 <div class="container mt-4 d-flex justify-content-center">
     <div class="card w-75 mt-4">
         <div class="card-header">
-            <h2 class="text-center">Form Informasi</h2>
+            <h2 class="text-center">Info User</h2>
         </div>
         <div class="card-body">
             @if ($errors->any())

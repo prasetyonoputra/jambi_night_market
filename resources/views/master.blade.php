@@ -19,16 +19,14 @@
 
         <div class="row">
             <div class="col-md-3 col-lg-2 bg-light border-right" id="sidebar">
-                <div class="sidebar-heading p-3">
-                    <a class="navbar-brand" href="#">
-                        JAMBI NIGHT MARKET
-                    </a>
+                <div class="sidebar-heading p-3 text-center">
+                    <h5>JAMBI NIGHT MARKET</h5>
                 </div>
                 @if (Auth::user()->role == 'penjual')
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <a href="{{ route('products.index') }}"
-                                class="list-group-item list-group-item-action">Product</a>
+                                class="list-group-item list-group-item-action">Kelola Product</a>
                         </li>
                         <li class="list-group-item">
                             <a href="{{ route('pembelian.index') }}" class="list-group-item list-group-item-action">Status
@@ -48,11 +46,14 @@
                                 Informasi UMKM</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">Kelola
-                                User</a>
+                            <a href="{{ route('pembelian.index') }}" class="list-group-item list-group-item-action">Status
+                                Pesanan</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" class="list-group-item list-group-item-action">Kelola Pesanan</a>
+                            <a href="{{ route('products.index') }}" class="list-group-item list-group-item-action">Kelola Produk</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">Kelola User</a>
                         </li>
                     </ul>
                 @endif
