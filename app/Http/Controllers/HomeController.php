@@ -9,11 +9,11 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'admin') {
-            return redirect('information');
+            return redirect('umkm');
         } else if (Auth::user()->role == 'penjual') {
             return redirect('products');
         } else {
-            return view('page.beranda_pembeli');
+            return redirect('products');
         }
     }
 }

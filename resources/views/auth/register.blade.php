@@ -37,6 +37,11 @@
                             required>
                     </div>
                     <div class="mb-3">
+                        <label for="alamat" class="form-label">Alamat</label>
+                        <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat"
+                            required>
+                    </div>
+                    <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select" id="role" name="role">
                             <option value="pembeli" selected>Pembeli</option>

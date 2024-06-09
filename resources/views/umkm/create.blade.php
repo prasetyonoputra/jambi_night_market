@@ -4,8 +4,13 @@
 <div class="container mt-4 d-flex justify-content-center">
     <div class="card w-75 mt-4">
         <div class="card-header">
-            <h2 class="text-center">Form Produk</h2>
+            <h2 class="text-center">Form Pendaftaran UMKM</h2>
         </div>
+
+        @if ($umkm->isNotEmpty())
+            <script>window.location = "{{ route('umkm.edit', $umkm->first()->id) }}";</script>
+        @endif
+
         <div class="card-body">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -17,30 +22,36 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('products.store') }}" method="POST">
+            <form action="{{ route('umkm.store') }}" method="POST">
                 @csrf
                 <div class="col">
                     <div class="form-group">
-                        <label for="nama_product"><strong>Nama Produk</strong></label>
-                        <input type="text" name="nama_product" class="form-control" placeholder="Nama Produk">
+                        <label for="nama_umkm"><strong>Nama UMKM</strong></label>
+                        <input type="text" name="nama_umkm" class="form-control" placeholder="Nama UMKM">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="deskripsi_produk"><strong>Deskripsi</strong></label>
-                        <textarea name="deskripsi_produk" class="form-control" rows="3"></textarea>
+                        <label for="email"><strong>Email</strong></label>
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="kategori_product"><strong>Kategori</strong></label>
-                        <input type="text" name="kategori_product" class="form-control" placeholder="Kategori">
+                        <label for="no_telp"><strong>No Telp</strong></label>
+                        <input type="text" name="no_telp" class="form-control" placeholder="No Telepon">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="harga"><strong>Harga</strong></label>
-                        <input type="number" name="harga" class="form-control" placeholder="Harga">
+                        <label for="alamat"><strong>Alamat</strong></label>
+                        <textarea name="alamat" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="deskripsi"><strong>Deskripsi</strong></label>
+                        <textarea name="deskripsi" class="form-control" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="row">

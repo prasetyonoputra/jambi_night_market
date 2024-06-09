@@ -27,10 +27,16 @@
                 @if (Auth::user()->role == 'penjual')
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="{{ route('products.index') }}" class="list-group-item list-group-item-action">Product</a>
+                            <a href="{{ route('products.index') }}"
+                                class="list-group-item list-group-item-action">Product</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" class="list-group-item list-group-item-action">Transaksi</a>
+                            <a href="{{ route('pembelian.index') }}" class="list-group-item list-group-item-action">Status
+                                Pesanan</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('umkm.create') }}" class="list-group-item list-group-item-action">Info
+                                UMKM</a>
                         </li>
                     </ul>
                 @endif
@@ -38,16 +44,26 @@
                 @if (Auth::user()->role == 'admin')
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="{{ route('information.index') }}" class="list-group-item list-group-item-action">Kelola Informasi</a>
+                            <a href="{{ route('umkm.index') }}" class="list-group-item list-group-item-action">Kelola
+                                Informasi UMKM</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" class="list-group-item list-group-item-action">Kelola Penjual</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="list-group-item list-group-item-action">Kelola Pembeli</a>
+                            <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">Kelola
+                                User</a>
                         </li>
                         <li class="list-group-item">
                             <a href="#" class="list-group-item list-group-item-action">Kelola Pesanan</a>
+                        </li>
+                    </ul>
+                @endif
+
+                @if (Auth::user()->role == 'pembeli')
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{{ route('products.index') }}" class="list-group-item list-group-item-action">Beli Produk</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('pembelian.index') }}" class="list-group-item list-group-item-action">Keranjang</a>
                         </li>
                     </ul>
                 @endif

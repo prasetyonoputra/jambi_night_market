@@ -4,31 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('pembelian', function (Blueprint $table) {
             $table->id();
             $table->string('nama_product');
-            $table->string('deskripsi_produk');
-            $table->string('kategori_product');
+            $table->string('id_pembeli');
+            $table->dateTime('tanggal_pembelian');
+            $table->integer('jumlah');
+            $table->decimal('total_harga', 18, 2);
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('products');
     }
-}
+};

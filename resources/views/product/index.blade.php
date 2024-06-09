@@ -1,20 +1,32 @@
 @extends('master')
 
 @section('konten')
+
+@if (Auth::user()->role == "penjual")
+    @if (sizeof($umkm) == 0)
+        <script>window.location = "{{ route('umkm.create') }}";</script>
+    @endif
+
+    @if (sizeof($umkm) > 0)
+        @if ($umkm->first()->status != "Terverifikasi")
+            <script>window.location = "{{ route('umkm.edit', $umkm->first()->id) }}";</script>
+        @endif
+    @endif
+@endif
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-12">
             <h2>Product List</h2>
-            <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add Product</a>
+            <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tambah Produk</a>
             <table class="table table-striped" id="productTable">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Stock</th>
-                        <th>Price</th>
-                        <th>Promo</th>
-                        <th>Image</th>
+                        <th>Nama Produk</th>
+                        <th>Harga Produk</th>
+                        <th>Deskripsi</th>
+                        <th>Kategori</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -22,20 +34,24 @@
                     @foreach ($products as $product)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->stock }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->promo }}</td>
-                            <td><img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->name }}" width="50"></td>
-                            </td>
+                            <td>{{ $product->nama_product }}</td>
+                            <td>{{ formatRupiah($product->harga) }}</td>
+                            <td>{{ $product->deskripsi_produk }}</td>
+                            <td>{{ $product->kategori_product }}</td>
                             <td>
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                                    style="display: inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                @if (Auth::user()->role != "pembeli")
+                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                        style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @endif
+
+                                @if (Auth::user()->role == "pembeli")
+                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-warning">Detail</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

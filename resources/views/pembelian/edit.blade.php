@@ -4,7 +4,7 @@
 <div class="container mt-4 d-flex justify-content-center">
     <div class="card w-75 mt-4">
         <div class="card-header">
-            <h2 class="text-center">Form Produk</h2>
+            <h2 class="text-center">Form Informasi</h2>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -17,30 +17,36 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('products.store') }}" method="POST">
+            <form method="POST" action="{{ route('information.update', $information->id) }}">
                 @csrf
+                @method('PUT')
+
                 <div class="col">
                     <div class="form-group">
-                        <label for="nama_product"><strong>Nama Produk</strong></label>
-                        <input type="text" name="nama_product" class="form-control" placeholder="Nama Produk">
+                        <label for="nama_umkm"><strong>Nama UMKM</strong></label>
+                        <input type="text" name="nama_umkm" class="form-control" placeholder="Nama UMKM"
+                            value="{{ old('nama_umkm', $information->nama_umkm) }}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="deskripsi_produk"><strong>Deskripsi</strong></label>
-                        <textarea name="deskripsi_produk" class="form-control" rows="3"></textarea>
+                        <label for="alamat"><strong>Alamat</strong></label>
+                        <textarea name="alamat" class="form-control"
+                            rows="3">{{ old('alamat', $information->alamat) }}</textarea>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="kategori_product"><strong>Kategori</strong></label>
-                        <input type="text" name="kategori_product" class="form-control" placeholder="Kategori">
+                        <label for="deskripsi"><strong>Deskripsi</strong></label>
+                        <textarea name="deskripsi" class="form-control"
+                            rows="3">{{ old('deskripsi', $information->deskripsi) }}</textarea>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="harga"><strong>Harga</strong></label>
-                        <input type="number" name="harga" class="form-control" placeholder="Harga">
+                        <label for="kontak"><strong>Kontak</strong></label>
+                        <input type="text" name="kontak" class="form-control" placeholder="Kontak"
+                            value="{{ old('kontak', $information->kontak) }}">
                     </div>
                 </div>
                 <div class="row">

@@ -8,41 +8,36 @@
                 <div class="card-header">Edit Product</div>
 
                 <div class="card-body">
-                    <form method="PUT" action="{{ route('products.update', $product->id) }}">
+                    <form method="POST" action="{{ route('products.update', $product->id) }}">
                         @csrf
                         @method('PUT')
 
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
+                            <label for="nama_product"><strong>Nama Produk</strong></label>
+                            <input type="text" class="form-control" id="nama_product" name="nama_product"
+                                value="{{ $product->nama_product }}">
                         </div>
-
                         <div class="form-group">
-                            <label for="stock">Stock</label>
-                            <input type="text" class="form-control" id="stock" name="stock" value="{{ $product->stock }}">
+                            <label for="deskripsi_produk"><strong>Deskripsi</strong></label>
+                            <textarea name="deskripsi_produk" class="form-control"
+                                rows="3">{{ $product->deskripsi_produk }}</textarea>
                         </div>
-
                         <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
+                            <label for="kategori_product"><strong>Kategori</strong></label>
+                            <input type="text" name="kategori_product" class="form-control" placeholder="Kategori"
+                                value="{{ $product->kategori_product }}">
                         </div>
-
-                        <div class="form-group">
-                            <label for="promo">Promo</label>
-                            <input type="text" class="form-control" id="promo" name="promo" value="{{ $product->promo }}">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="harga"><strong>Harga</strong></label>
+                                <input type="number" name="harga" class="form-control" placeholder="Harga">
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="existing_image">Current Image:</label>
-                            <img src="{{ asset('images/products/' . $product->image) }}" alt="Product Image" width="100">
+                        <div class="row">
+                            <div class="col-md-12 mt-3 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="image">New Image:</label>
-                            <input type="file" class="form-control" id="image" name="image">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Update Product</button>
                     </form>
                 </div>
             </div>
