@@ -8,6 +8,11 @@ use Session;
 
 class LoginController extends Controller
 {
+    public function index()
+    {
+        return view('auth.first');
+    }
+
     public function login()
     {
         if (Auth::check()) {

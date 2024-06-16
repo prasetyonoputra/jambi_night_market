@@ -13,11 +13,6 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $product->nama_product }}" disabled>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="name"><strong>Nama UMKM</strong></label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $product->nama_umkm }}" disabled>
-                        </div> -->
                         <div class="form-group">
                             <label for="deskripsi_produk"><strong>Deskripsi</strong></label>
                             <textarea name="deskripsi_produk" class="form-control" rows="3"
@@ -27,6 +22,14 @@
                             <label for="kategori_product"><strong>Kategori</strong></label>
                             <input type="text" name="kategori_product" class="form-control" placeholder="Kategori"
                                 value="{{ $product->kategori_product }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="image"><strong>Product Image</strong></label>
+                            <br>
+                            @if ($product->image)
+                                <img src="{{ asset('images/' . $product->image) }}" alt="Product Image" width="100"
+                                    class="mt-3">
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="harga"><strong>Harga</strong></label>

@@ -23,21 +23,28 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validationRequest = $request->validate([
-            'nama_product' => 'required',
-            'deskripsi_produk' => 'required',
-            'kategori_product' => 'required',
-            'harga' => 'required',
-        ]);
+{
+    $validationRequest = $request->validate([
+        'nama_product' => 'required',
+        'deskripsi_produk' => 'required',
+        'kategori_product' => 'required',
+        'harga' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        $validationRequest["id_penjual"] = Auth::user()->id;
-
-        Product::create($validationRequest);
-
-        return redirect()->route('products.index')
-            ->with('success', 'Produk berhasil ditambahkan!');
+    if ($request->hasFile('image')) {
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $validationRequest['image'] = $imageName;
     }
+
+    $validationRequest['id_penjual'] = Auth::user()->id;
+
+    Product::create($validationRequest);
+
+    return redirect()->route('products.index')
+        ->with('success', 'Produk berhasil ditambahkan!');
+}
 
     public function show(Product $product)
     {
@@ -50,18 +57,29 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, Product $product)
-    {
-        $validationRequest = $request->validate([
-            'nama_product' => 'required',
-            'deskripsi_produk' => 'required',
-            'kategori_product' => 'required',
-            'harga' => 'required',
-        ]);
+{
+    $validationRequest = $request->validate([
+        'nama_product' => 'required',
+        'deskripsi_produk' => 'required',
+        'kategori_product' => 'required',
+        'harga' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        $product->update($validationRequest);
+    if ($request->hasFile('image')) {
+        if ($product->image) {
+            unlink(public_path('images') . '/' . $product->image);
+        }
 
-        return redirect()->route('products.index')->with('success', 'Berhasil update produk!.');
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $validationRequest['image'] = $imageName;
     }
+
+    $product->update($validationRequest);
+
+    return redirect()->route('products.index')->with('success', 'Berhasil update produk!.');
+}
 
     public function destroy(Product $product)
     {

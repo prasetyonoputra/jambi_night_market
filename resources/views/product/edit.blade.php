@@ -8,7 +8,8 @@
                 <div class="card-header">Edit Product</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('products.update', $product->id) }}">
+                    <form method="POST" action="{{ route('products.update', $product->id) }}"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -27,11 +28,18 @@
                             <input type="text" name="kategori_product" class="form-control" placeholder="Kategori"
                                 value="{{ $product->kategori_product }}">
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="harga"><strong>Harga</strong></label>
-                                <input type="number" name="harga" class="form-control" placeholder="Harga">
-                            </div>
+                        <div class="form-group">
+                            <label for="harga"><strong>Harga</strong></label>
+                            <input type="number" name="harga" class="form-control" placeholder="Harga"
+                                value="{{ $product->harga }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="image"><strong>Product Image</strong></label>
+                            <input type="file" class="form-control" name="image">
+                            @if ($product->image)
+                                <img src="{{ asset('images/' . $product->image) }}" alt="Product Image" width="100"
+                                    class="mt-3">
+                            @endif
                         </div>
                         <div class="row">
                             <div class="col-md-12 mt-3 d-flex justify-content-end">

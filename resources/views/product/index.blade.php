@@ -3,14 +3,12 @@
 @section('konten')
 
 @if (Auth::user()->role == "penjual")
-    @if (sizeof($umkm) == 0)
+    @if ($umkm->isEmpty())
         <script>window.location = "{{ route('umkm.create') }}";</script>
     @endif
 
-    @if (sizeof($umkm) > 0)
-        @if ($umkm->first()->status != "Terverifikasi")
-            <script>window.location = "{{ route('umkm.edit', $umkm->first()->id) }}";</script>
-        @endif
+    @if ($umkm->isNotEmpty() && $umkm->first()->status != "Terverifikasi")
+        <script>window.location = "{{ route('umkm.edit', $umkm->first()->id) }}";</script>
     @endif
 @endif
 
@@ -19,7 +17,7 @@
         <div class="col-lg-12">
             <h2>List Produk</h2>
             @if (Auth::user()->role != "pembeli")
-            <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tambah Produk</a>
+                <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tambah Produk</a>
             @endif
             <table class="table table-striped" id="productTable">
                 <thead>
@@ -29,6 +27,7 @@
                         <th>Harga Produk</th>
                         <th>Deskripsi</th>
                         <th>Kategori</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -40,6 +39,13 @@
                             <td>{{ formatRupiah($product->harga) }}</td>
                             <td>{{ $product->deskripsi_produk }}</td>
                             <td>{{ $product->kategori_product }}</td>
+                            <td>
+                                @if ($product->image)
+                                    <img src="{{ asset('images/' . $product->image) }}" alt="Product Image" width="100">
+                                @else
+                                    No Image
+                                @endif
+                            </td>
                             <td>
                                 @if (Auth::user()->role != "pembeli")
                                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
